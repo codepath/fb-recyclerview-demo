@@ -19,15 +19,6 @@ public class ContactsAdapter extends ListAdapter<Contact, ContactsAdapter.ViewHo
 
     private List<Contact> mContacts = new ArrayList<>();
 
-    public ContactsAdapter() {
-        super(DIFF_CALLBACK);
-    }
-
-    public void addMoreContacts(List<Contact> newContacts) {
-        mContacts.addAll(newContacts);
-        submitList(mContacts); // DiffUtil takes care of the chekc
-    }
-
     public static final DiffUtil.ItemCallback<Contact> DIFF_CALLBACK =
             new DiffUtil.ItemCallback<Contact>() {
                 @Override
@@ -40,6 +31,15 @@ public class ContactsAdapter extends ListAdapter<Contact, ContactsAdapter.ViewHo
                     return (oldItem.getName() == newItem.getName() && oldItem.isOnline() == newItem.isOnline());
                 }
             };
+
+    public ContactsAdapter() {
+        super(DIFF_CALLBACK);
+    }
+
+    public void addMoreContacts(List<Contact> newContacts) {
+        mContacts.addAll(newContacts);
+        submitList(mContacts); // DiffUtil takes care of the chekc
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
